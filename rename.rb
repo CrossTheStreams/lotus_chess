@@ -1,7 +1,7 @@
 class Rename
 
   NEW_NAME = ARGV[0]
-  OLD_NAME = 'Boilerplate'
+  OLD_NAME = 'WebChess'
 
   def self.rename_entries(directory)
     paths = paths_for_entries(directory)

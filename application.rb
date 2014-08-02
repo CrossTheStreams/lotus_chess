@@ -1,6 +1,6 @@
 require 'lotus'
 
-module Boilerplate
+module WebChess
   class Application < Lotus::Application
     configure do
       routes 'config/routes'

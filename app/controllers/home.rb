@@ -1,7 +1,7 @@
-module Boilerplate
+module WebChess
   module Controllers
     module Home
-      include Boilerplate::Controller
+      include WebChess::Controller
 
       action 'Index' do
         def call(params)

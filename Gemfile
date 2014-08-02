@@ -8,4 +8,6 @@ gem 'rspec'
 
 gem 'pry'
 
+gem 'chess'
+
 gem 'rerun'

@@ -1,9 +1,9 @@
-module Boilerplate
+module WebChess
   module Views
     module Home
 
       class Index
-        include Boilerplate::View
+        include WebChess::View
         layout :application
 
 
