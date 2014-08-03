@@ -2,3 +2,8 @@
   margin: auto;
   width: 400px;;
 }
+.jasmine_html-reporter {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
