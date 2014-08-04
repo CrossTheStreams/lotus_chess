@@ -1,6 +1,61 @@
 $(document).ready(function(){
-  var board = new ChessBoard('board', {
-    position: 'start',
-    draggable: true
+
+  var Turn = Backbone.Model.extend({
+    defaults: function (attribute) {
+      return {
+        fen: '',
+        status: '',
+        move: 'start'
+      } 
+    },
   });
+
+  var TurnList = Backbone.Collection.extend({
+    model: Turn
+  });
+
+  var Turns = new TurnList;
+
+  var TurnView = Backbone.View.extend({
+    initialize: function () {
+      //this.listenTo(this.model, 'change', this.render); 
+    },
+    render: function (attribute) {
+      console.log("foo");
+      return this; 
+    },
+  });
+
+  ChessBoardView = Backbone.View.extend({
+    initialize: function() {
+      var chessView = this;
+      chessView.turns = new TurnList;
+      this.board = new ChessBoard('board', {
+        position: 'start',
+        draggable: true,
+        onChange: function (startPosition, endPosition) {
+          var moveString = startPosition + "-" + endPosition;
+           chessView.recordMove(moveString);
+        }
+      });
+    },
+    currentPosition: function () {
+      var turnCount = this.turns.length; 
+      if (turnCount < 1) {
+        return "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+      } else {
+        return this.turns.first().attributes.fen;
+      }
+    },
+    setBoardCallbacks: function() {
+      this.board.onChange
+    },
+    recordMove : function (move) {
+      var newTurn = new Turn({move: move});
+      this.turns.add(newTurn);
+    }
+  });
+
+  game = new ChessBoardView;
+
 });
