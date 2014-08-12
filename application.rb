@@ -1,5 +1,7 @@
 require 'lotus'
-
+require 'pry'
+require 'lotus/model'
+require 'lotus/model/adapters/sql_adapter'
 module WebChess
 
   def self.env
@@ -14,7 +16,8 @@ module WebChess
 
       load_paths << [
         'app/controllers',
-        'app/views'
+        'app/views',
+        'app/models'
       ]
     end
 

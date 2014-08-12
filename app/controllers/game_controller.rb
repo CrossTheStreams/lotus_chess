@@ -1,15 +1,17 @@
 module WebChess
   module Controllers
-    module Home
+
+    class Game 
       include WebChess::Controller
 
-      action 'Index' do
+      action 'Show' do
         def call(params)
         end
       end
 
-
     end
+
   end
 end
+
 

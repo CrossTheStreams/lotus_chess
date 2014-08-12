@@ -1,20 +1,16 @@
 module WebChess
   module Views
+    class Game
 
-    class Home
-
-      class Index
+      class Show
         include WebChess::View
         layout :application
 
-
-        def omg
-          ["o","m","g"]
-        end
 
       end
 
     end
   end
 end
+
 

@@ -8,6 +8,16 @@ $(document).ready(function(){
         move: 'start'
       } 
     },
+    initialize : function () {
+      console.log("move = "+this.move); 
+    },
+    post : function() {
+      var move = this.move;
+      $.ajax({
+        url : '/game/1/move/create',
+        data : {move: move}
+      }) 
+    }
   });
 
   var TurnList = Backbone.Collection.extend({
@@ -35,7 +45,7 @@ $(document).ready(function(){
         draggable: true,
         onChange: function (startPosition, endPosition) {
           var moveString = startPosition + "-" + endPosition;
-           chessView.recordMove(moveString);
+           chessView.attemptMove(moveString);
         }
       });
     },
@@ -50,7 +60,7 @@ $(document).ready(function(){
     setBoardCallbacks: function() {
       this.board.onChange
     },
-    recordMove : function (move) {
+    attemptMove : function (move) {
       var newTurn = new Turn({move: move});
       this.turns.add(newTurn);
     }

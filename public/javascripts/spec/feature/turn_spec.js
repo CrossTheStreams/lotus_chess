@@ -6,6 +6,11 @@ describe("Chess Game",function(){
 
     beforeEach(function(){
       game = new ChessBoardView;
+      jasmine.Ajax.install();
+    });
+
+    afterEach(function(){
+      jasmine.Ajax.uninstall(); 
     });
 
     describe("On the first turn", function(){
@@ -22,9 +27,18 @@ describe("Chess Game",function(){
     });
 
     describe("Making a move", function(){
+      var move = 'e2-e4',
+      ajaxPath = '/game/1/move/create/'+move,
+      callback = jasmine.createSpy('callback');
 
       beforeEach(function() {
-        game.board.move('e2-e4');
+        game.attemptMove(callback({url: ajaxPath, data: {move: move}}));
+
+        jasmine.Ajax.stubRequest(ajaxPath).andReturn({
+          status: 200,
+          contentType: 'text/plain',
+          responseText: 'awesome response' 
+        });
       });
 
       it("adds a turn object to the game", function(){
@@ -33,6 +47,10 @@ describe("Chess Game",function(){
 
       it("changes the FEN string",function(){
         expect(game.currentPosition()).not.toBe('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+      });
+
+      it("makes a request to create a new move",function(){
+        expect(callback).toHaveBeenCalledWith(jasmine.objectContaining({ url : ajaxPath, data: { move: move} }));
       });
 
     });

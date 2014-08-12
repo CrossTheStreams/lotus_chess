@@ -3,7 +3,6 @@ GEM
   specs:
     celluloid (0.15.2)
       timers (~> 1.1.0)
-    chess (0.0.4)
     coderay (1.1.0)
     diff-lcs (1.2.5)
     ffi (1.9.3)
@@ -19,6 +18,9 @@ GEM
     lotus-controller (0.2.0)
       lotus-utils (~> 0.2)
       rack (~> 1.5)
+    lotus-model (0.1.2)
+      lotus-utils (~> 0.2)
+      sequel (~> 4.9)
     lotus-router (0.1.1)
       http_router (~> 0)
       lotus-utils (~> 0)
@@ -32,6 +34,7 @@ GEM
       lotus-utils (~> 0.2)
       lotus-view (~> 0.2)
     method_source (0.8.2)
+    pg (0.17.1)
     pry (0.10.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -55,6 +58,7 @@ GEM
     rspec-mocks (3.0.3)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.3)
+    sequel (4.13.0)
     slop (3.6.0)
     tilt (2.0.1)
     timers (1.1.0)
@@ -65,9 +69,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  chess
   haml
+  lotus-model
   lotusrb
+  pg
   pry
   rake
   rerun
