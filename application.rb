@@ -9,6 +9,7 @@ module WebChess
   end
 
   class Application < Lotus::Application
+
     configure do
       routes 'config/routes'
 
@@ -19,6 +20,9 @@ module WebChess
         'app/views',
         'app/models'
       ]
+
+      require_relative './config/database'
+      
     end
 
   end
