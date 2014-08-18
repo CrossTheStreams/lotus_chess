@@ -1,32 +1,35 @@
 $(document).ready(function(){
 
-  var Turn = Backbone.Model.extend({
-    defaults: function (attribute) {
-      return {
-        fen: '',
-        status: '',
-        move: 'start'
-      } 
-    },
-    initialize : function () {
-      console.log("move = "+this.move); 
-    },
-    post : function() {
-      var move = this.move;
-      $.ajax({
-        url : '/game/1/move/create',
-        data : {move: move}
-      }) 
+   //Backbone.sync = function(method, model) {
+     //console.log(method + ": " + JSON.stringify(model));
+     //model.set('id', 1);
+   //};
+
+   Move = Backbone.Model.extend({
+     defaults: function (attribute) {
+       return {
+         fen: '',
+         status: '',
+         move: 'start'
+       } 
+     },
+     initialize : function () {
+ 
+     },
+     validate : function () {
+       return undefined;
+     }
+   });
+
+  var Game = Backbone.Collection.extend({
+    model: Move,
+    id: 1,
+    url: function () {
+      return '/game/'+this.id+'/turns';
     }
   });
 
-  var TurnList = Backbone.Collection.extend({
-    model: Turn
-  });
-
-  var Turns = new TurnList;
-
-  var TurnView = Backbone.View.extend({
+  var MoveView = Backbone.View.extend({
     initialize: function () {
       //this.listenTo(this.model, 'change', this.render); 
     },
@@ -39,7 +42,7 @@ $(document).ready(function(){
   ChessBoardView = Backbone.View.extend({
     initialize: function() {
       var chessView = this;
-      chessView.turns = new TurnList;
+      chessView.turns = new Game;
       this.board = new ChessBoard('board', {
         position: 'start',
         draggable: true,
@@ -61,8 +64,9 @@ $(document).ready(function(){
       this.board.onChange
     },
     attemptMove : function (move) {
-      var newTurn = new Turn({move: move});
-      this.turns.add(newTurn);
+      var newMove = new Move({move: move});
+      this.turns.add(newMove);
+      newMove.save();
     }
   });
 

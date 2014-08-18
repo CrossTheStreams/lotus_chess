@@ -2,7 +2,7 @@
 describe("Chess Game",function(){
   var game;
 
-  describe("Turns", function() {
+  describe("Moves", function() {
 
     beforeEach(function(){
       game = new ChessBoardView;
@@ -28,11 +28,14 @@ describe("Chess Game",function(){
 
     describe("Making a move", function(){
       var move = 'e2-e4',
-      ajaxPath = '/game/1/move/create/'+move,
+      ajaxPath = '/game/1/moves',
       callback = jasmine.createSpy('callback');
 
       beforeEach(function() {
-        game.attemptMove(callback({url: ajaxPath, data: {move: move}}));
+
+        spyOn($,'ajax');
+
+        game.attemptMove(move);
 
         jasmine.Ajax.stubRequest(ajaxPath).andReturn({
           status: 200,
@@ -49,8 +52,14 @@ describe("Chess Game",function(){
         expect(game.currentPosition()).not.toBe('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
       });
 
-      it("makes a request to create a new move",function(){
-        expect(callback).toHaveBeenCalledWith(jasmine.objectContaining({ url : ajaxPath, data: { move: move} }));
+      it("makes a request to create a new move",function() {
+        var postRequest = jasmine.objectContaining({
+          type: 'POST',
+          url: '/game/1/turns',
+          data: '{"move":"e2-e4","fen":"","status":""}'
+        });
+
+        expect($.ajax).toHaveBeenCalledWith(postRequest);
       });
 
     });
