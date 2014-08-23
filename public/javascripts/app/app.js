@@ -1,13 +1,9 @@
 $(document).ready(function(){
 
-   //Backbone.sync = function(method, model) {
-     //console.log(method + ": " + JSON.stringify(model));
-     //model.set('id', 1);
-   //};
-
    Move = Backbone.Model.extend({
      defaults: function (attribute) {
        return {
+         // The FEN string representation of the board, before the move occurs
          fen: '',
          status: '',
          move: 'start'

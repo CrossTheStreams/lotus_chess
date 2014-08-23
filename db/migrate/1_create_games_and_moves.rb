@@ -1,18 +1,16 @@
 Sequel.migration do
   up do
-
     create_table(:games) do
       primary_key :id
-      String :fen_string
     end
 
     create_table(:moves) do
       primary_key :id      
       foreign_key :game_id, :games
       String :algebraic
+      String :fen_string
       Boolean :valid
     end
-
   end
 
   down do

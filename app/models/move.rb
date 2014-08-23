@@ -1,17 +1,19 @@
 module WebChess
   module Model
-    class Game
+    class Move
       include Lotus::Entity
-      self.attributes = :id
 
     end
+  end
+end
 
-
-    class GameRepository
+module WebChess
+  module Model
+    class MoveRepository
       include Lotus::Repository
 
 
     end
-
   end
 end
+
