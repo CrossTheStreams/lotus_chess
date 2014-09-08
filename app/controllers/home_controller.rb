@@ -1,6 +1,6 @@
 module WebChess
   module Controllers
-    module Home
+    class Home
       include WebChess::Controller
 
       action 'Index' do

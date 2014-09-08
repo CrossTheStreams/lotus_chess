@@ -1,38 +1,59 @@
-
 describe("Chess Game",function(){
-  var game;
 
-  describe("Turns", function() {
+  describe("Moves", function() {
 
     beforeEach(function(){
-      game = new ChessBoardView;
+      jasmine.Ajax.install();
+    });
+
+    afterEach(function(){
+      webChess.board = new ChessBoardView;
+      webChess.engine = new Chess();
+      jasmine.Ajax.uninstall(); 
     });
 
     describe("On the first turn", function(){
 
-      // TODO: Perhaps a first turn starts after a button is pushed or something?
-      it("the game has zero turns.", function() {
-        expect(game.turns.length).toBe(0);
+      it("a new game", function() {
+        expect(webChess.board.moves.length).toBe(0);
       });
 
       it("has a the FEN string for a starting chess board.", function(){
-        expect(game.currentPosition()).toBe('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+        expect(webChess.board.currentPosition()).toEqual(webChess.startFen);
       });
 
     });
 
-    describe("Making a move", function(){
+    describe("making a valid move", function(){
+      var move = {from: 'e2', to: 'e4'},
+      ajaxPath = '/game/1/moves',
+      callback = jasmine.createSpy('callback');
 
       beforeEach(function() {
-        game.board.move('e2-e4');
+        spyOn($,'ajax');
+        jasmine.Ajax.stubRequest(ajaxPath).andReturn({
+          status: 200,
+          contentType: 'text/plain',
+          responseText: 'awesome response' 
+        });
+        webChess.board.attemptMove(move);
       });
 
-      it("adds a turn object to the game", function(){
-        expect(game.turns.length).toBe(1);
+      it("adds a move object to the game", function(){
+        expect(webChess.board.moves.length).toBe(1);
       });
 
       it("changes the FEN string",function(){
-        expect(game.currentPosition()).not.toBe('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+        expect(webChess.board.currentPosition()).not.toEqual(webChess.startFen);
+      });
+
+      it("makes a request to create a new move",function() {
+        var postRequest = jasmine.objectContaining({
+          type: 'POST',
+          url: '/games/1/moves',
+          data: '{"move":{"from":"e2","to":"e4"},"fen":"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"}' 
+        });
+        expect($.ajax).toHaveBeenCalledWith(postRequest);
       });
 
     });
