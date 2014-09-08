@@ -7,11 +7,6 @@ module WebChess
         include WebChess::View
         layout :application
 
-
-        def omg
-          ["o","m","g"]
-        end
-
       end
 
     end

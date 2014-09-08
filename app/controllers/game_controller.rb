@@ -5,7 +5,9 @@ module WebChess
       include WebChess::Controller
 
       action 'Show' do
+        expose :game
         def call(params)
+          @game = Model::GameRepository.find(params[:id])
         end
       end
 

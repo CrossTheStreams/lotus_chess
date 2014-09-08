@@ -6,6 +6,9 @@ module WebChess
         include WebChess::View
         layout :application
 
+        def current_fen
+          @game.current_fen 
+        end
 
       end
 

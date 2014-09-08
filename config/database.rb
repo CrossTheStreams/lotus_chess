@@ -18,8 +18,7 @@ module WebChess
           entity Move
           attribute :id, Integer
           attribute :game_id, Integer
-          attribute :algebraic, String
-          attribute :fen_string, String
+          attribute :json, String
           attribute :valid, Boolean
         end
 

@@ -1,5 +1,6 @@
 require 'lotus'
 require 'pry'
+require 'byebug'
 require 'pg'
 require 'lotus/model'
 require 'lotus/model/adapters/sql_adapter'

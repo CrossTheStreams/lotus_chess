@@ -1,5 +1,6 @@
 module WebChess
   module Model
+
     class Game
       include Lotus::Entity
       self.attributes = :id

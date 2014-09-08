@@ -1,28 +1,39 @@
 $(document).ready(function(){
 
-   Move = Backbone.Model.extend({
+  webChess = {
+    startFen: (new Chess().fen())
+  } || webChess;
+
+  Move = Backbone.Model.extend({
      defaults: function (attribute) {
        return {
-         // The FEN string representation of the board, before the move occurs
-         fen: '',
-         status: '',
          move: 'start'
        } 
      },
-     initialize : function () {
- 
+     initialize : function () { 
      },
-     validate : function () {
-       return undefined;
-     }
-   });
+     url: function () {
+       return '/games/1/moves';
+     },
+     validate : function (attributes, options) {
+       moveObj = attributes.move, 
+       results = webChess.engine.move(moveObj);
 
-  var Game = Backbone.Collection.extend({
+       if (results) {
+         console.log("results are valid");
+         // set the move's FEN string to the new state of the board
+         this.attributes.fen = webChess.engine.fen();
+         return undefined;
+       } else {
+         console.log('move is invalid');
+         return "invalid move" 
+       }
+     }
+  });
+
+  MoveList = Backbone.Collection.extend({
     model: Move,
-    id: 1,
-    url: function () {
-      return '/game/'+this.id+'/turns';
-    }
+    id: 1
   });
 
   var MoveView = Backbone.View.extend({
@@ -30,30 +41,29 @@ $(document).ready(function(){
       //this.listenTo(this.model, 'change', this.render); 
     },
     render: function (attribute) {
-      console.log("foo");
       return this; 
     },
   });
 
   ChessBoardView = Backbone.View.extend({
-    initialize: function() {
+    id: 'board',
+    initialize: function(options) {
       var chessView = this;
-      chessView.turns = new Game;
+      chessView.moves = new MoveList;
       this.board = new ChessBoard('board', {
         position: 'start',
         draggable: true,
         onChange: function (startPosition, endPosition) {
-          var moveString = startPosition + "-" + endPosition;
-           chessView.attemptMove(moveString);
+          chessView.attemptMove({from: startPosition, to: endPosition});
         }
       });
     },
     currentPosition: function () {
-      var turnCount = this.turns.length; 
-      if (turnCount < 1) {
-        return "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+      var lastMove = this.moves.last();
+      if (lastMove) {
+        return lastMove.fen;
       } else {
-        return this.turns.first().attributes.fen;
+        return webChess.startFen; 
       }
     },
     setBoardCallbacks: function() {
@@ -61,11 +71,26 @@ $(document).ready(function(){
     },
     attemptMove : function (move) {
       var newMove = new Move({move: move});
-      this.turns.add(newMove);
       newMove.save();
+      // add this move if it's valid
+      if (!newMove.validationError) {
+        this.moves.add(newMove);
+        //console.log("move was successful");
+        return newMove;
+      } else {
+        //console.log("move was invalid"); 
+      }
     }
   });
 
-  game = new ChessBoardView;
+  webChess.board = new ChessBoardView;
+
+  if (typeof(webChess.board.currentPosition()) == webChess.startFen) {
+    webChess.engine = new Chess();
+  } else {  
+    webChess.engine = new Chess(webChess.board.currentPosition());
+  }
+
 
 });
+

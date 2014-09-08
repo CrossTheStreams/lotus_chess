@@ -1,40 +1,28 @@
-!!!
+!!! 5
 %html
-%head
-  %title 
-    = page_title
-  %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/bootstrap.min.css'}
-  %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/chessboard-0.3.0.min.css'}
-  %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/application.css'}
-  %script{src: '/javascripts/jquery-1.11.1.min.js'}
-  %script{src: '/javascripts/bootstrap.min.js'}
-  %script{src: '/javascripts/underscore.min.js'}
-  %script{src: '/javascripts/backbone.min.js'}
-  %script{src: '/javascripts/chessboard-0.3.0.min.js'}
-  %script{src: '/javascripts/app/app.js'}
-  - if WebChess.env == 'development'
-    %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/jasmine/jasmine.css'}
-    %script{src: '/javascripts/jasmine/jasmine.js'}
-    %script{src: '/javascripts/jasmine/jasmine-html.js'}
-    %script{src: '/javascripts/jasmine/boot.js'}
-    %script{src: '/javascripts/jasmine/console.js'}
-    %script{src: '/javascripts/spec/feature/turn_spec.js'}
-    %script{src: '/javascripts/jasmine/mock-ajax.js'}
-  %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
-
-%body
-  -##fb-root For Facebook API, if needed
-  .navbar.navbar-inverse.navbar-fixed-top
-    .navbar-inner{style: 'height:40px'}
-      .container{style: 'height:40px'}
-        %a.navbar-brand{href: '#'} 
-          WebChess
-        .nav-collapse.collapse
-          %ul.nav.navbar-nav
-            %li 
-              %a{href: 'https://github.com/CrossTheStreams/lotus_boilerplate', target: '_blank'} 
-                GitHub Repo
-  .container{style: 'margin-top:50px;'}
-    %br
-    = yield 
-
+  %head
+    %title 
+      = page_title
+    %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/bootstrap.min.css'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/chessboard-0.3.0.min.css'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/application.css'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+    %script{src: '/javascripts/jquery-1.11.1.min.js'}
+    %script{src: '/javascripts/bootstrap.min.js'}
+    %script{src: '/javascripts/underscore.min.js'}
+    %script{src: '/javascripts/backbone.min.js'}
+  %body
+    -##fb-root For Facebook API, if needed
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner{style: 'height:40px'}
+        .container{style: 'height:40px'}
+          %a.navbar-brand{href: '#'} 
+            WebChess
+          .nav-collapse.collapse
+            %ul.nav.navbar-nav
+              %li 
+                %a{href: 'https://github.com/CrossTheStreams/lotus_boilerplate', target: '_blank'} 
+                  GitHub Repo
+    .container{style: 'margin-top:50px;'}
+      %br
+      = yield 

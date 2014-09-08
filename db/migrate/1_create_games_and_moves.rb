@@ -7,8 +7,7 @@ Sequel.migration do
     create_table(:moves) do
       primary_key :id      
       foreign_key :game_id, :games
-      String :algebraic
-      String :fen_string
+      column :json, :json
       Boolean :valid
     end
   end
