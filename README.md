@@ -1,1 +1,1 @@
-Chess web app using ths Lotus web framework and Backbone.js 
+Chess web app using the Lotus web framework and Backbone.js 
