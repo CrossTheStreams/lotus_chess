@@ -26,7 +26,7 @@ describe("Chess Game",function(){
 
     describe("making a valid move", function(){
       var move = {from: 'e2', to: 'e4'},
-      ajaxPath = '/game/1/moves',
+      ajaxPath = '/moves',
       callback = jasmine.createSpy('callback');
 
       beforeEach(function() {
@@ -50,7 +50,7 @@ describe("Chess Game",function(){
       it("makes a request to create a new move",function() {
         var postRequest = jasmine.objectContaining({
           type: 'POST',
-          url: '/games/1/moves',
+          url: ajaxPath,
           data: '{"move":{"from":"e2","to":"e4"},"fen":"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"}' 
         });
         expect($.ajax).toHaveBeenCalledWith(postRequest);

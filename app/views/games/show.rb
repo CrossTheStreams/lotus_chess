@@ -1,6 +1,6 @@
 module WebChess
   module Views
-    class Game
+    class Games
 
       class Show
         include WebChess::View

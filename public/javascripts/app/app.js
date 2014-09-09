@@ -13,7 +13,7 @@ $(document).ready(function(){
      initialize : function () { 
      },
      url: function () {
-       return '/games/1/moves';
+       return '/moves';
      },
      validate : function (attributes, options) {
        moveObj = attributes.move, 

@@ -1,7 +1,7 @@
 module WebChess
   module Controllers
 
-    class Game 
+    class Games
       include Lotus::Controller
 
       action 'Show' do
@@ -10,7 +10,7 @@ module WebChess
           @game = Model::GameRepository.find(params[:id])
         end
       end
-
+    
     end
 
   end

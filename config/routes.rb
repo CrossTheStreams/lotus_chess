@@ -2,4 +2,6 @@ get '/', to: 'home#index'
 
 resource :user
 
-resources :game, except: [:destroy]
+resources :games, except: [:destroy]
+
+resources :moves, except: [:destroy]
