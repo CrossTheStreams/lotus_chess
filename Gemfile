@@ -9,6 +9,7 @@ gem 'haml'
 gem 'jbuilder'
 
 gem 'rspec'
+gem 'nyan-cat-formatter'
 
 gem 'pry'
 gem 'byebug'

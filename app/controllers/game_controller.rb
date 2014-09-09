@@ -2,7 +2,7 @@ module WebChess
   module Controllers
 
     class Game 
-      include WebChess::Controller
+      include Lotus::Controller
 
       action 'Show' do
         expose :game
