@@ -2,8 +2,10 @@ class WebChess::Controllers::Moves
 
   describe Create do
 
-    it "is awesome" do
-      expect(true).to eq(true) 
+    it "initializes a new move entity" do
+    end
+
+    it "creates a move record in the database" do
     end
 
   end
