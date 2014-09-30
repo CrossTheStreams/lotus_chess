@@ -10,7 +10,7 @@ module WebChess
           @game = Model::GameRepository.find(params[:id])
         end
       end
-
+    
     end
 
   end

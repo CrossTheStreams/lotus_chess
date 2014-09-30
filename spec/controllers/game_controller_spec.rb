@@ -1,4 +1,4 @@
-class WebChess::Controllers::Game
+class WebChess::Controllers::Games
 
   describe Show do
 

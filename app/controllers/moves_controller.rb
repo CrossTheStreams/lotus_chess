@@ -23,4 +23,3 @@ module WebChess
 end
 
 
-
