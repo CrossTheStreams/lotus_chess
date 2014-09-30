@@ -1,5 +1,7 @@
 require_relative 'application.rb'
 
-run WebChess::Application.new
+application = WebChess::Application.new
+run application 
 
 require_relative './config/database'
+

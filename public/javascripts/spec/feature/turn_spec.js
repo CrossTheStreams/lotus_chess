@@ -50,8 +50,8 @@ describe("Chess Game",function(){
       it("makes a request to create a new move",function() {
         var postRequest = jasmine.objectContaining({
           type: 'POST',
-          url: '/games/1/moves',
-          data: '{"move":{"from":"e2","to":"e4"},"fen":"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"}' 
+          url: '/moves',
+          data: '{"move":{"from":"e2","to":"e4"},"game_id":1,"fen":"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"}' 
         });
         expect($.ajax).toHaveBeenCalledWith(postRequest);
       });

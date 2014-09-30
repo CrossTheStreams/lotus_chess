@@ -7,25 +7,24 @@ $(document).ready(function(){
   Move = Backbone.Model.extend({
      defaults: function (attribute) {
        return {
-         move: 'start'
+         move: 'start',
+         game_id: 1
        } 
      },
      initialize : function () { 
      },
      url: function () {
-       return '/games/1/moves';
+       return '/moves';
      },
      validate : function (attributes, options) {
        moveObj = attributes.move, 
        results = webChess.engine.move(moveObj);
 
        if (results) {
-         console.log("results are valid");
          // set the move's FEN string to the new state of the board
          this.attributes.fen = webChess.engine.fen();
          return undefined;
        } else {
-         console.log('move is invalid');
          return "invalid move" 
        }
      }
@@ -51,10 +50,10 @@ $(document).ready(function(){
       var chessView = this;
       chessView.moves = new MoveList;
       this.board = new ChessBoard('board', {
-        position: 'start',
+        position: webChess.startFen,
         draggable: true,
-        onChange: function (startPosition, endPosition) {
-          chessView.attemptMove({from: startPosition, to: endPosition});
+        onDrop: function (source, target) {
+          chessView.attemptMove({from: source, to: target});
         }
       });
     },
@@ -65,9 +64,6 @@ $(document).ready(function(){
       } else {
         return webChess.startFen; 
       }
-    },
-    setBoardCallbacks: function() {
-      this.board.onChange
     },
     attemptMove : function (move) {
       var newMove = new Move({move: move});
@@ -83,14 +79,13 @@ $(document).ready(function(){
     }
   });
 
-  webChess.board = new ChessBoardView;
+  webChess.board = new ChessBoardView();
 
   if (typeof(webChess.board.currentPosition()) == webChess.startFen) {
     webChess.engine = new Chess();
   } else {  
     webChess.engine = new Chess(webChess.board.currentPosition());
   }
-
 
 });
 

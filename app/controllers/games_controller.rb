@@ -1,7 +1,7 @@
 module WebChess
   module Controllers
 
-    class Game 
+    class Games
       include Lotus::Controller
 
       action 'Show' do
