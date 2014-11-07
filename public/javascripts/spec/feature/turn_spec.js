@@ -15,7 +15,7 @@ describe("Chess Game",function(){
     describe("On the first turn", function(){
 
       it("a new game", function() {
-        expect(webChess.board.moves.length).toBe(0);
+        expect(webChess.moves.length).toBe(0);
       });
 
       it("has a the FEN string for a starting chess board.", function(){
@@ -25,6 +25,7 @@ describe("Chess Game",function(){
     });
 
     describe("making a valid move", function(){
+
       var move = {from: 'e2', to: 'e4'},
       ajaxPath = '/moves',
       callback = jasmine.createSpy('callback');
@@ -36,18 +37,18 @@ describe("Chess Game",function(){
           contentType: 'text/plain',
           responseText: 'awesome response' 
         });
-        webChess.board.attemptMove(move);
+        webChess.board.render(move);
       });
 
-      it("adds a move object to the game", function(){
-        expect(webChess.board.moves.length).toBe(1);
+      it("adds a move object", function(){
+        expect(webChess.moves.length).toBe(1);
       });
 
-      it("changes the FEN string",function(){
+      it("changes the FEN string", function(){
         expect(webChess.board.currentPosition()).not.toEqual(webChess.startFen);
       });
 
-      it("makes a request to create a new move",function() {
+      it("makes a request to create a new move", function() {
         var postRequest = jasmine.objectContaining({
           type: 'POST',
           url: ajaxPath,
