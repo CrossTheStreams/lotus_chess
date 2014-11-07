@@ -4,15 +4,21 @@ module WebChess
     class Moves
       include Lotus::Controller
 
-      action 'Create' do
-        def call(params)
-          #new_move = Model::Move.new(params)
-          #@game = Model::GameRepository.find(params[:id])
-        end
-      end
-    
-    end
+      class Create
+        include Lotus::Action
 
+        def call(params)
+          byebug
+          puts "Moves controller"
+          puts params.to_h
+          #@game = Model::GameRepository.find(params[:id])
+          #move = Move.new(json: params[:move]
+          #Model::MoveRepository.save(move)
+        end
+
+      end
+
+    end
   end
 end
 

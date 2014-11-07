@@ -3,7 +3,8 @@ $(document).ready(function(){
   Move = Backbone.Model.extend({
      defaults: function (attribute) {
        return {
-         move: 'start'
+         move: 'start',
+         game_id: 1
        } 
      },
      initialize : function () { 
@@ -16,12 +17,10 @@ $(document).ready(function(){
        results = webChess.engine.move(moveObj);
 
        if (results) {
-         console.log("results are valid");
          // set the move's FEN string to the new state of the board
          this.attributes.fen = webChess.engine.fen();
          return undefined;
        } else {
-         console.log('move is invalid');
          return "invalid move" 
        }
      }
@@ -36,7 +35,7 @@ $(document).ready(function(){
     initialize: function(options) {
       var chessView = this;
       this.board = new ChessBoard('board', {
-        position: 'start',
+        position: webChess.startFen,
         draggable: true,
         onChange: function (startPosition, endPosition) {
           chessView.render({from: startPosition, to: endPosition});
@@ -74,7 +73,7 @@ $(document).ready(function(){
         //console.log("move was invalid"); 
       }
     }
-  }
+  });
 
   // set the starting position for the engine
   if (typeof(webChess.currentPosition()) == webChess.startFen) {
