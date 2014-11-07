@@ -17,6 +17,7 @@ $(document).ready(function(){
        results = webChess.engine.move(moveObj);
 
        if (results) {
+         console.log(results);
          // set the move's FEN string to the new state of the board
          this.attributes.fen = webChess.engine.fen();
          return undefined;
@@ -37,12 +38,13 @@ $(document).ready(function(){
       this.board = new ChessBoard('board', {
         position: 'start',
         draggable: true,
-        onChange: function (startPosition, endPosition) {
+        onDrop: function (startPosition, endPosition) {
+          //console.log(startPosition);
+          //console.log(endPosition);
           chessView.render({from: startPosition, to: endPosition});
         }
       });
     },
-
     render: function (move) {
       webChess.attemptMove(move);
       return this;
@@ -56,13 +58,14 @@ $(document).ready(function(){
     currentPosition: function () {
       var lastMove = this.moves.last();
       if (lastMove) {
-        return lastMove.fen;
+        return lastMove.attributes.fen;
       } else {
         return webChess.startFen; 
       }
     },
     attemptMove: function (move) {
       var newMove = new Move({move: move});
+      foo = newMove;
       newMove.save();
       // add this move if it's valid
       if (!newMove.validationError) {
