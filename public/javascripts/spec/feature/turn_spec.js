@@ -19,7 +19,7 @@ describe("Chess Game",function(){
       });
 
       it("has a the FEN string for a starting chess board.", function(){
-        expect(webChess.board.currentPosition()).toEqual(webChess.startFen);
+        expect(webChess.currentPosition()).toEqual(webChess.startFen);
       });
 
     });
@@ -45,7 +45,7 @@ describe("Chess Game",function(){
       });
 
       it("changes the FEN string", function(){
-        expect(webChess.board.currentPosition()).not.toEqual(webChess.startFen);
+        expect(webChess.currentPosition()).not.toEqual(webChess.startFen);
       });
 
       it("makes a request to create a new move", function() {
