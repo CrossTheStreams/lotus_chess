@@ -39,7 +39,7 @@ $(document).ready(function(){
         position: 'start',
         draggable: true,
         onChange: function (startPosition, endPosition) {
-          this.render({from: startPosition, to: endPosition});
+          chessView.render({from: startPosition, to: endPosition});
         }
       });
     },
