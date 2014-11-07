@@ -35,7 +35,7 @@ $(document).ready(function(){
     initialize: function(options) {
       var chessView = this;
       this.board = new ChessBoard('board', {
-        position: webChess.startFen,
+        position: 'start',
         draggable: true,
         onChange: function (startPosition, endPosition) {
           chessView.render({from: startPosition, to: endPosition});
@@ -73,7 +73,7 @@ $(document).ready(function(){
         //console.log("move was invalid"); 
       }
     }
-  });
+  };
 
   // set the starting position for the engine
   if (typeof(webChess.currentPosition()) == webChess.startFen) {
