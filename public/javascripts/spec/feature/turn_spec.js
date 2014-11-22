@@ -35,7 +35,7 @@ describe("Chess Game",function(){
         spyOn($,'ajax');
         jasmine.Ajax.stubRequest(ajaxPath).andReturn({
           status: 200,
-          contentType: 'text/plain',
+          contentType: 'application/json',
           responseText: 'awesome response' 
         });
         webChess.board.render(move);

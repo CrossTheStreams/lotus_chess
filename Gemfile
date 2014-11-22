@@ -1,8 +1,10 @@
 source 'http://rubygems.org'
 
 gem 'thin'
-gem 'lotusrb'
+gem 'rack-parser', :require => 'rack/parser'
+gem 'lotusrb', git: 'https://github.com/lotus/lotus.git'
 gem 'lotus-model'
+
 
 gem 'pg'
 gem 'haml'
@@ -17,5 +19,5 @@ gem 'rerun'
 
 gem 'rake'
 
-
+gem 'restart'
 

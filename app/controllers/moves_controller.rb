@@ -1,3 +1,6 @@
+require 'json'
+require 'lotus/utils/hash'
+
 module WebChess
   module Controllers
 
@@ -9,8 +12,6 @@ module WebChess
 
         def call(params)
           byebug
-          puts "Moves controller"
-          puts params.to_h
           #@game = Model::GameRepository.find(params[:id])
           #move = Move.new(json: params[:move]
           #Model::MoveRepository.save(move)
