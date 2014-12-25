@@ -29,12 +29,15 @@ RSpec.configure do |config|
 
   DatabaseCleaner[:sequel, {:connection => Sequel.connect("postgres://localhost:5432/web_chess_#{WebChess.env}")}]
 
-  DatabaseCleaner.strategy = :truncation 
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-  # TODO: Why is the transaction strategy not working?
-  # transaction would be prefereable, but side-stepping the issue for now.
-  config.after(:each) do 
-    DatabaseCleaner.clean
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 
 # The settings below are suggested to provide a good initial experience
