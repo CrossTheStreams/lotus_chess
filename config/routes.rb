@@ -4,4 +4,4 @@ resource :user
 
 resources :games, except: [:destroy]
 
-resources :moves, except: [:destroy]
+resources :moves, only: [:index, :create]

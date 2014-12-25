@@ -9,7 +9,7 @@ describe("Chess Game",function(){
     afterEach(function(){
       webChess.board = new ChessBoardView;
       webChess.engine = new Chess;
-      webChess.moves = new MoveList;
+      webChess.moves = new Game;
       jasmine.Ajax.uninstall(); 
     });
 

@@ -17,7 +17,7 @@ $(document).ready(function(){
        results = webChess.engine.move(moveObj);
 
        if (results) {
-         console.log(results);
+         //console.log(results);
          // set the move's FEN string to the new state of the board
          this.attributes.fen = webChess.engine.fen();
          return undefined;
@@ -27,7 +27,7 @@ $(document).ready(function(){
      }
   });
 
-  MoveList = Backbone.Collection.extend({
+  Game = Backbone.Collection.extend({
     model: Move,
   });
  
@@ -53,7 +53,7 @@ $(document).ready(function(){
 
   webChess = {
     startFen: (new Chess().fen()),
-    moves: (new MoveList),
+    moves: (new Game),
     board: (new ChessBoardView),
     currentPosition: function () {
       var lastMove = this.moves.last();
@@ -65,8 +65,8 @@ $(document).ready(function(){
     },
     attemptMove: function (move) {
       var newMove = new Move({move: move});
-      foo = newMove;
       newMove.save();
+      //console.log(saved);
       // add this move if it's valid
       if (!newMove.validationError) {
         this.moves.add(newMove);

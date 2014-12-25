@@ -8,7 +8,6 @@ Sequel.migration do
       primary_key :id      
       foreign_key :game_id, :games
       column :json, :json
-      Boolean :valid
     end
   end
 

@@ -4,6 +4,10 @@ module WebChess
     @adapter ||= Lotus::Model::Adapters::SqlAdapter.new(WebChess::Model.mapper, "postgres://localhost:5432/web_chess_#{WebChess.env}")
   end
 
+  def self.db
+    @adapter.instance_variable_get(:@connection) 
+  end
+
   module Model
 
     def self.mapper
@@ -19,7 +23,6 @@ module WebChess
           attribute :id, Integer
           attribute :game_id, Integer
           attribute :json, String
-          attribute :valid, Boolean
         end
 
       end.load!

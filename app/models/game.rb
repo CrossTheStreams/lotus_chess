@@ -11,7 +11,6 @@ module WebChess
     class GameRepository
       include Lotus::Repository
 
-
     end
 
   end
